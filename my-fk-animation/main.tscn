@@ -9,7 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://c6efpnunl5ic7" path="res://assets/Man-side - 왼팔.png" id="7_dg77c"]
 
 [sub_resource type="Animation" id="Animation_5vw27"]
-length = 0.001
+length = 0.5
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -17,10 +18,10 @@ tracks/0/path = NodePath("Torso/RemoteArmR:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
 "update": 0,
-"values": [0.045920953]
+"values": []
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -29,15 +30,16 @@ tracks/1/path = NodePath("Torso/ArmL:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
 "update": 0,
-"values": [1.0982467]
+"values": []
 }
 
 [sub_resource type="Animation" id="Animation_272bh"]
 resource_name = "dance"
 length = 0.5
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -45,10 +47,10 @@ tracks/0/path = NodePath("Torso/RemoteArmR:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.23945625),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0.005126724, 0.1, 0.23945625, 0.36656076, 0.49558333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [0.045920953, 1.8884462, 0.88313663]
+"values": [0.88313663, 1.8884462, 0.88313663, 1.8884462, 0.88313663]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -57,10 +59,10 @@ tracks/1/path = NodePath("Torso/ArmL:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.23945625),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0.005126724, 0.1, 0.23945625, 0.36656076, 0.49558333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [0.0, 1.0982467, 2.019346]
+"values": [2.019346, 1.0982467, 2.019346, 1.0982467, 2.019346]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5vw27"]
@@ -70,10 +72,13 @@ _data = {
 }
 
 [node name="Root" type="Node2D"]
+position = Vector2(609, 364)
+scale = Vector2(3, 3)
 script = ExtResource("1_ig7tw")
 
 [node name="ArmR" type="Sprite2D" parent="."]
 position = Vector2(-6, -6)
+rotation = 0.8831366
 texture = ExtResource("5_4c57u")
 offset = Vector2(-9, 17)
 metadata/_edit_lock_ = true
@@ -83,7 +88,7 @@ position = Vector2(-7, 32)
 texture = ExtResource("3_5vw27")
 
 [node name="LegL" type="Sprite2D" parent="."]
-position = Vector2(13, 18)
+position = Vector2(13, 18.000008)
 texture = ExtResource("6_efxa6")
 offset = Vector2(-2.4345856, 21.50905)
 metadata/_edit_lock_ = true
@@ -98,7 +103,7 @@ texture = ExtResource("2_272bh")
 
 [node name="ArmL" type="Sprite2D" parent="Torso"]
 position = Vector2(16, -10)
-rotation = 1.0982467
+rotation = 2.019346
 texture = ExtResource("7_dg77c")
 offset = Vector2(4, 17)
 
@@ -108,10 +113,11 @@ remote_path = NodePath("../../LegL")
 
 [node name="RemoteArmR" type="RemoteTransform2D" parent="Torso"]
 position = Vector2(-10, -7)
-rotation = 0.045920953
+rotation = 0.88313663
 remote_path = NodePath("../../ArmR")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_5vw27")
 }
+autoplay = "dance"
