@@ -20,16 +20,15 @@
 script = ExtResource("1_ig7tw")
 
 [node name="HandL" type="Sprite2D" parent="."]
-position = Vector2(172.76855, -144.37411)
-rotation = -1.8252904
-scale = Vector2(0.99999994, 0.99999994)
+position = Vector2(163.28052, -123.65971)
+rotation = -1.6104013
 texture = ExtResource("5_5vw27")
 offset = Vector2(17.493805, 63.52512)
 metadata/_edit_lock_ = true
 
 [node name="ArmL" type="Sprite2D" parent="."]
 position = Vector2(72, -178.00002)
-rotation = -1.2113287
+rotation = -0.9964395
 texture = ExtResource("4_272bh")
 offset = Vector2(9.196594, 21.271072)
 metadata/_edit_lock_ = true
@@ -67,16 +66,17 @@ offset = Vector2(9.536743e-07, -130.00003)
 metadata/_edit_lock_ = true
 
 [node name="Haed" type="Sprite2D" parent="Hip/Torse"]
-position = Vector2(9.034179, -374.86954)
-rotation = 0.028875686
+position = Vector2(7.3710732, -215.99149)
+rotation = 0.032028966
 texture = ExtResource("8_vivmo")
-metadata/_edit_lock_ = true
+offset = Vector2(-3.530962, -158.84752)
+metadata/_edit_group_ = true
 
 [node name="Jaw" type="Sprite2D" parent="Hip/Torse/Haed"]
-position = Vector2(5, 152)
-rotation = -0.0013713822
+position = Vector2(-116.81881, -21.222599)
+rotation = 0.010415679
 texture = ExtResource("9_2cqfq")
-metadata/_edit_lock_ = true
+offset = Vector2(120.85719, 2.8384094)
 
 [node name="LegR" type="Sprite2D" parent="Hip/Torse"]
 position = Vector2(-50.73565, 36.591953)
@@ -92,14 +92,26 @@ offset = Vector2(14, 44)
 
 [node name="FootR" type="Sprite2D" parent="Hip/Torse/LegR/ShinR"]
 position = Vector2(-0.51485825, 99.217545)
-rotation = -0.12139553
+rotation = -0.12408002
 scale = Vector2(1.0000001, 1.0000001)
 texture = ExtResource("13_vivmo")
 offset = Vector2(48.956795, 13.932251)
 
+[node name="ArmR" type="Sprite2D" parent="Hip/Torse"]
+position = Vector2(-80.88585, -135.27448)
+rotation = -0.2481305
+texture = ExtResource("6_kek77")
+offset = Vector2(10.582024, 26.34137)
+
+[node name="HandR" type="Sprite2D" parent="Hip/Torse/ArmR"]
+position = Vector2(-16.802475, 73.50524)
+rotation = -0.8780249
+texture = ExtResource("7_4c57u")
+offset = Vector2(14.674683, 71.96163)
+
 [node name="RemoteArmL" type="RemoteTransform2D" parent="Hip/Torse"]
 position = Vector2(65.099945, -166.18408)
-rotation = -1.1827791
+rotation = -0.96788996
 remote_path = NodePath("../../../ArmL")
 
 [node name="RemoteHandL" type="RemoteTransform2D" parent="Hip/Torse/RemoteArmL"]
@@ -121,15 +133,3 @@ remote_path = NodePath("../../../../ShinL")
 position = Vector2(-3.9826717, 99.411766)
 rotation = 0.2801745
 remote_path = NodePath("../../../../../FootL")
-
-[node name="ArmR" type="Sprite2D" parent="Hip/Torse"]
-position = Vector2(-80.88586, -135.27448)
-rotation = -0.28985226
-texture = ExtResource("6_kek77")
-offset = Vector2(10.582024, 26.34137)
-
-[node name="HandR" type="Sprite2D" parent="Hip/Torse/ArmR"]
-position = Vector2(-16.802475, 73.50524)
-rotation = -1.3921161
-texture = ExtResource("7_4c57u")
-offset = Vector2(14.674683, 71.96163)
