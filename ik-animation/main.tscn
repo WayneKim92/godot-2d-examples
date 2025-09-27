@@ -1,0 +1,135 @@
+[gd_scene load_steps=16 format=3 uid="uid://d33mwejbh1m7m"]
+
+[ext_resource type="Script" uid="uid://c6dje8amkjv10" path="res://main.gd" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://3b52t4hhplxt" path="res://assets/gBot_hip.png" id="2_h2yge"]
+[ext_resource type="Texture2D" uid="uid://x4sglkv5rrb3" path="res://assets/gBot_body.png" id="3_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://436oti0nefnv" path="res://assets/gBot_arm_l.png" id="4_272bh"]
+[ext_resource type="Texture2D" uid="uid://dfvg3wnaus70s" path="res://assets/gBot_leg_l.png" id="4_ycdy4"]
+[ext_resource type="Texture2D" uid="uid://d31hxolapr1ol" path="res://assets/gBot_forearm_l.png" id="5_5vw27"]
+[ext_resource type="Texture2D" uid="uid://cstj6fpexwbm1" path="res://assets/gBot_shin_l.png" id="5_w48qg"]
+[ext_resource type="Texture2D" uid="uid://dkdl2bu4lau7a" path="res://assets/gBot_arm_r.png" id="6_kek77"]
+[ext_resource type="Texture2D" uid="uid://bsaib4kr1lfc5" path="res://assets/gBot_foot_l.png" id="6_w48qg"]
+[ext_resource type="Texture2D" uid="uid://bvnv3fvhtuc3" path="res://assets/gBot_forearm_r.png" id="7_4c57u"]
+[ext_resource type="Texture2D" uid="uid://c77cnaleauljt" path="res://assets/gBot_head.png" id="8_vivmo"]
+[ext_resource type="Texture2D" uid="uid://dhi0ertnfljpn" path="res://assets/gBot_jaw.png" id="9_2cqfq"]
+[ext_resource type="Texture2D" uid="uid://df1yp1o27eehv" path="res://assets/gBot_leg_r.png" id="10_yaehf"]
+[ext_resource type="Texture2D" uid="uid://cfn4oqr8h46si" path="res://assets/gBot_shin_r.png" id="11_074og"]
+[ext_resource type="Texture2D" uid="uid://bnulcvmjs8d5d" path="res://assets/gBot_foot_r.png" id="13_vivmo"]
+
+[node name="Root" type="Node2D"]
+script = ExtResource("1_ig7tw")
+
+[node name="HandL" type="Sprite2D" parent="."]
+position = Vector2(163.28052, -123.65971)
+rotation = -1.6104013
+texture = ExtResource("5_5vw27")
+offset = Vector2(17.493805, 63.52512)
+metadata/_edit_lock_ = true
+
+[node name="ArmL" type="Sprite2D" parent="."]
+position = Vector2(72, -178.00002)
+rotation = -0.9964395
+texture = ExtResource("4_272bh")
+offset = Vector2(9.196594, 21.271072)
+metadata/_edit_lock_ = true
+
+[node name="LegL" type="Sprite2D" parent="."]
+position = Vector2(36.999996, -5.0000024)
+rotation = -0.37383083
+texture = ExtResource("4_ycdy4")
+offset = Vector2(-4.6450233, 74.4551)
+metadata/_edit_lock_ = true
+
+[node name="ShinL" type="Sprite2D" parent="."]
+position = Vector2(69.49688, 114.60333)
+rotation = -0.3094766
+texture = ExtResource("5_w48qg")
+offset = Vector2(17.888536, 44.34626)
+metadata/_edit_lock_ = true
+
+[node name="FootL" type="Sprite2D" parent="."]
+position = Vector2(95.98028, 210.50534)
+rotation = -0.029302107
+scale = Vector2(1.0000001, 1.0000001)
+texture = ExtResource("6_w48qg")
+offset = Vector2(44.9479, 12.647354)
+
+[node name="Hip" type="Sprite2D" parent="."]
+position = Vector2(-2, 5)
+texture = ExtResource("2_h2yge")
+
+[node name="Torse" type="Sprite2D" parent="Hip"]
+position = Vector2(13.670429, -15.02533)
+rotation = -0.028549613
+texture = ExtResource("3_1bvp3")
+offset = Vector2(9.536743e-07, -130.00003)
+metadata/_edit_lock_ = true
+
+[node name="Haed" type="Sprite2D" parent="Hip/Torse"]
+position = Vector2(7.3710732, -215.99149)
+rotation = 0.032028966
+texture = ExtResource("8_vivmo")
+offset = Vector2(-3.530962, -158.84752)
+metadata/_edit_group_ = true
+
+[node name="Jaw" type="Sprite2D" parent="Hip/Torse/Haed"]
+position = Vector2(-116.81881, -21.222599)
+rotation = 0.010415679
+texture = ExtResource("9_2cqfq")
+offset = Vector2(120.85719, 2.8384094)
+
+[node name="LegR" type="Sprite2D" parent="Hip/Torse"]
+position = Vector2(-50.73565, 36.591953)
+rotation = -0.28470868
+texture = ExtResource("10_yaehf")
+offset = Vector2(-16.999996, 48.000008)
+
+[node name="ShinR" type="Sprite2D" parent="Hip/Torse/LegR"]
+position = Vector2(-27, 104)
+rotation = 0.4442905
+texture = ExtResource("11_074og")
+offset = Vector2(14, 44)
+
+[node name="FootR" type="Sprite2D" parent="Hip/Torse/LegR/ShinR"]
+position = Vector2(-0.51485825, 99.217545)
+rotation = -0.12408002
+scale = Vector2(1.0000001, 1.0000001)
+texture = ExtResource("13_vivmo")
+offset = Vector2(48.956795, 13.932251)
+
+[node name="ArmR" type="Sprite2D" parent="Hip/Torse"]
+position = Vector2(-80.88585, -135.27448)
+rotation = -0.2481305
+texture = ExtResource("6_kek77")
+offset = Vector2(10.582024, 26.34137)
+
+[node name="HandR" type="Sprite2D" parent="Hip/Torse/ArmR"]
+position = Vector2(-16.802475, 73.50524)
+rotation = -0.8780249
+texture = ExtResource("7_4c57u")
+offset = Vector2(14.674683, 71.96163)
+
+[node name="RemoteArmL" type="RemoteTransform2D" parent="Hip/Torse"]
+position = Vector2(65.099945, -166.18408)
+rotation = -0.96788996
+remote_path = NodePath("../../../ArmL")
+
+[node name="RemoteHandL" type="RemoteTransform2D" parent="Hip/Torse/RemoteArmL"]
+position = Vector2(3.9712844, 106.15664)
+rotation = -0.61396176
+remote_path = NodePath("../../../../HandL")
+
+[node name="RemoteLegL" type="RemoteTransform2D" parent="Hip/Torse"]
+position = Vector2(25.175793, 5.7463303)
+rotation = -0.3452812
+remote_path = NodePath("../../../LegL")
+
+[node name="RemoteShinL" type="RemoteTransform2D" parent="Hip/Torse/RemoteLegL"]
+position = Vector2(-13.4247675, 123.2103)
+rotation = 0.064354196
+remote_path = NodePath("../../../../ShinL")
+
+[node name="RemoteFootL" type="RemoteTransform2D" parent="Hip/Torse/RemoteLegL/RemoteShinL"]
+position = Vector2(-3.9826717, 99.411766)
+rotation = 0.2801745
+remote_path = NodePath("../../../../../FootL")
