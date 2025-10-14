@@ -1,0 +1,98 @@
+[gd_scene load_steps=7 format=3 uid="uid://brdyvo1n8b520"]
+
+[ext_resource type="Script" uid="uid://cvqjon26jgmse" path="res://16x16-grid-2d-shader/p1.gd" id="1_fpcn7"]
+[ext_resource type="Texture2D" uid="uid://36a0pn16gukk" path="res://16x16-grid-2d-shader/icon.svg" id="2_xlxm7"]
+[ext_resource type="Shader" uid="uid://dtluh8awgp4at" path="res://16x16-grid-2d-shader/grid_shader.gdshader" id="3_etx26"]
+[ext_resource type="Script" uid="uid://dnmq6v3wqdm4q" path="res://16x16-grid-2d-shader/icon.gd" id="4_icon"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2"]
+shader = ExtResource("3_etx26")
+shader_parameter/grid_size = 8
+shader_parameter/grid_line_width = 0.01
+shader_parameter/grid_line_color = Color(1, 1, 1, 1)
+shader_parameter/cell_alpha = 0.6
+shader_parameter/use_texture_blend = true
+shader_parameter/texture_blend_amount = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1"]
+shader = ExtResource("3_etx26")
+shader_parameter/grid_size = 4
+shader_parameter/grid_line_width = 0.02
+shader_parameter/grid_line_color = Color(0, 0, 0, 1)
+shader_parameter/cell_alpha = 0.8
+shader_parameter/use_texture_blend = false
+shader_parameter/texture_blend_amount = 0.5
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_fpcn7")
+
+[node name="Icon" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_2")
+position = Vector2(440, 261)
+texture = ExtResource("2_xlxm7")
+script = ExtResource("4_icon")
+
+[node name="GridExample" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_1")
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 350.0
+offset_bottom = 350.0
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="TitleLabel" type="Label" parent="UI"]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 400.0
+offset_bottom = 50.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 24
+text = "Grid Shader Example"
+
+[node name="GridLabel" type="Label" parent="UI"]
+offset_left = 50.0
+offset_top = 360.0
+offset_right = 350.0
+offset_bottom = 400.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 14
+text = "GridExample (ColorRect)
+Size: 4x4 | Random: OFF"
+
+[node name="IconLabel" type="Label" parent="UI"]
+offset_left = 370.0
+offset_top = 360.0
+offset_right = 570.0
+offset_bottom = 400.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 14
+text = "Icon (Sprite2D)
+Size: 8x8 | Blend: ON (50%)"
+
+[node name="ControlsLabel" type="Label" parent="UI"]
+offset_left = 20.0
+offset_top = 420.0
+offset_right = 600.0
+offset_bottom = 600.0
+theme_override_colors/font_color = Color(0.8, 1, 0.8, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 12
+text = "Controls:
+• Mouse Left Click: Change grid size (GridExample)
+• Mouse Right Click: Change line width (GridExample)
+• SPACE: Change Icon grid size
+• B: Adjust Icon blend amount
+• R: Toggle random colors mode
+• C: Generate new random colors"
