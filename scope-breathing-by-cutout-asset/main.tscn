@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bf7awb5soyg13"]
+
+[ext_resource type="Script" uid="uid://cx8dtslwsxjhn" path="res://main.gd" id="1_h2yge"]
+[ext_resource type="Texture2D" uid="uid://d0nmvqrcgfvhj" path="res://main.png" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://bc5niwlcyrqfj" path="res://chest.png" id="2_0xm2m"]
+
+[node name="Man" type="CharacterBody2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_h2yge")
+
+[node name="Main" type="Sprite2D" parent="."]
+texture = ExtResource("1_ig7tw")
+
+[node name="Chest" type="Sprite2D" parent="."]
+texture = ExtResource("2_0xm2m")
+
+[node name="Camera2D" type="Camera2D" parent="."]
