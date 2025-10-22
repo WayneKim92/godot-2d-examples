@@ -2,7 +2,6 @@ shader_type canvas_item;
 
 // 콜라병 변형 강도
 uniform float bottle_strength : hint_range(0.0, 2.0) = 1.0;
-uniform vec4 bottle_color : source_color = vec4(1.0, 0.0, 0.0, 1.0); // 기본 빨간색
 
 void fragment() {
 	// UV.y는 0(위)에서 1(아래)로 감
@@ -38,9 +37,9 @@ void fragment() {
 	// 병의 실제 반경 계산 (bottle_strength 적용)
 	float bottle_radius = bottle_width * bottle_strength * 0.5;
 	
-	// 병 영역 안이면 빨간색, 밖이면 투명
+	// 병 영역 안이면 원본 텍스처 색상 유지, 밖이면 투명
 	if (x_from_center <= bottle_radius) {
-		COLOR = bottle_color;
+		COLOR = texture(TEXTURE, UV);
 	} else {
 		COLOR = vec4(0.0, 0.0, 0.0, 0.0); // 투명
 	}

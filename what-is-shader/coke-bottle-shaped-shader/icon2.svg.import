@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cy1iiqpdsrkli"
-path="res://.godot/imported/icon.svg-6d848a1c498e7719c62973a0751eb22c.ctex"
+uid="uid://bdklknemc13wa"
+path="res://.godot/imported/icon2.svg-7d476099fc98a578ca5ca53ca3025e42.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://16x16-grid-2d-shader/icon.svg"
-dest_files=["res://.godot/imported/icon.svg-6d848a1c498e7719c62973a0751eb22c.ctex"]
+source_file="res://coke-bottle-shaped-shader/icon2.svg"
+dest_files=["res://.godot/imported/icon2.svg-7d476099fc98a578ca5ca53ca3025e42.ctex"]
 
 [params]
 

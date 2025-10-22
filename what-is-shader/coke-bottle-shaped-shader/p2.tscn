@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://b4xalbtr2cbdw"]
+[gd_scene load_steps=5 format=3 uid="uid://b4xalbtr2cbdw"]
 
 [ext_resource type="Script" uid="uid://chxybom0okt5a" path="res://coke-bottle-shaped-shader/p_2.gd" id="1_rl6u1"]
 [ext_resource type="Shader" uid="uid://k8yq2epe4vuq" path="res://coke-bottle-shaped-shader/coke_bottle_shader.gdshader" id="2_shader"]
+[ext_resource type="Texture2D" uid="uid://bdklknemc13wa" path="res://coke-bottle-shaped-shader/icon2.svg" id="3_s4jus"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bottle"]
 shader = ExtResource("2_shader")
@@ -17,3 +18,8 @@ offset_left = 410.0
 offset_top = 119.0
 offset_right = 610.0
 offset_bottom = 519.0
+
+[node name="Icon2" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_bottle")
+position = Vector2(804, 318)
+texture = ExtResource("3_s4jus")
