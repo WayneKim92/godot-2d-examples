@@ -4,8 +4,9 @@ shader_type canvas_item;
 uniform float bottle_strength : hint_range(0.0, 2.0) = 1.0;
 
 void fragment() {
-	// UV.y는 0(위)에서 1(아래)로 감
-	float y = UV.y;
+	// 현재 픽셀의 UV 좌표
+	vec2 uv = UV;
+	float y = uv.y;
 	
 	// 콜라병 모양 곡선 계산 - 각 높이에서의 병 너비
 	float bottle_width;
@@ -30,17 +31,20 @@ void fragment() {
 		bottle_width = 1.0 - t * 0.15;
 	}
 	
-	// 현재 픽셀이 병 영역 안에 있는지 확인
-	// UV.x가 중심(0.5)으로부터 얼마나 떨어져 있는지
-	float x_from_center = abs(UV.x - 0.5);
+	// UV.x를 중심(0.5)을 기준으로 변형
+	float x_offset = (uv.x - 0.5);
 	
-	// 병의 실제 반경 계산 (bottle_strength 적용)
-	float bottle_radius = bottle_width * bottle_strength * 0.5;
+	// 콜라병 너비에 따라 UV.x 조정
+	// bottle_width가 작으면 더 압축되어 샘플링
+	float modified_x = 0.5 + (x_offset / (bottle_width * bottle_strength));
 	
-	// 병 영역 안이면 원본 텍스처 색상 유지, 밖이면 투명
-	if (x_from_center <= bottle_radius) {
-		COLOR = texture(TEXTURE, UV);
+	// 변형된 UV로 텍스처 샘플링
+	vec2 modified_uv = vec2(modified_x, y);
+	
+	// UV 범위를 벗어나면 투명 처리
+	if (modified_x < 0.0 || modified_x > 1.0) {
+		COLOR = vec4(0.0, 0.0, 0.0, 0.0);
 	} else {
-		COLOR = vec4(0.0, 0.0, 0.0, 0.0); // 투명
+		COLOR = texture(TEXTURE, modified_uv);
 	}
 }
