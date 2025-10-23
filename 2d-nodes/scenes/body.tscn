@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://bn1xuhyfpftiy"]
+[gd_scene load_steps=13 format=3 uid="uid://bn1xuhyfpftiy"]
 
 [ext_resource type="Script" uid="uid://de2f0b1t0tta4" path="res://scenes/body.gd" id="1_veluv"]
 [ext_resource type="Texture2D" uid="uid://cu1cbkgncd34e" path="res://assets/장판.png" id="2_lgxe7"]
 [ext_resource type="Texture2D" uid="uid://hdynfhrpjraq" path="res://assets/복숭아2.png" id="3_glwu3"]
 [ext_resource type="Script" uid="uid://doypb3ma373hw" path="res://scenes/character_controller.gd" id="4_glwu3"]
 [ext_resource type="Texture2D" uid="uid://bpr1ep7qx1wp7" path="res://assets/Man-side.png" id="4_lgxe7"]
+[ext_resource type="Texture2D" uid="uid://bhbwcjkqn0gtq" path="res://assets/전구.png" id="6_xc2jm"]
 
 [sub_resource type="GDScript" id="GDScript_y5ufn"]
 
@@ -17,10 +18,17 @@ radius = 8.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lgxe7"]
 size = Vector2(13, 28)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_anchor"]
+size = Vector2(20, 10)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bulb"]
+radius = 15.0
+
 [node name="Main" type="Node2D"]
 script = ExtResource("1_veluv")
 
 [node name="Platforms" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
 
 [node name="AnimatableBody2D" type="AnimatableBody2D" parent="Platforms"]
 position = Vector2(507.99994, 412.99994)
@@ -67,7 +75,32 @@ texture = ExtResource("2_lgxe7")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/StaticBody2D4"]
 shape = SubResource("RectangleShape2D_w7va6")
 
+[node name="AnimatableBody2D2" type="AnimatableBody2D" parent="Platforms"]
+position = Vector2(203.00003, 412.99994)
+scale = Vector2(5, 5)
+script = SubResource("GDScript_y5ufn")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Platforms/AnimatableBody2D2"]
+texture = ExtResource("2_lgxe7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/AnimatableBody2D2"]
+shape = SubResource("RectangleShape2D_w7va6")
+
+[node name="AnimatableBody2D3" type="AnimatableBody2D" parent="Platforms"]
+position = Vector2(972, 412.99994)
+scale = Vector2(5, 5)
+script = SubResource("GDScript_y5ufn")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Platforms/AnimatableBody2D3"]
+texture = ExtResource("2_lgxe7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/AnimatableBody2D3"]
+shape = SubResource("RectangleShape2D_w7va6")
+
 [node name="Fruits" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
 
 [node name="RigidBody2D" type="RigidBody2D" parent="Fruits"]
 position = Vector2(522, 141)
@@ -125,7 +158,7 @@ shape = SubResource("CircleShape2D_2d31a")
 texture = ExtResource("3_glwu3")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-position = Vector2(364, 164)
+position = Vector2(354, 251)
 script = ExtResource("4_glwu3")
 metadata/_edit_group_ = true
 
@@ -137,3 +170,87 @@ shape = SubResource("RectangleShape2D_lgxe7")
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D/CollisionShape2D"]
 texture = ExtResource("4_lgxe7")
 flip_h = true
+
+[node name="ElectricBulbs" type="Node2D" parent="."]
+position = Vector2(62, 74)
+
+[node name="PinJointBulb" type="PinJoint2D" parent="ElectricBulbs"]
+position = Vector2(604, 74)
+node_a = NodePath("AnchorBody")
+node_b = NodePath("RigidBody2D")
+metadata/_edit_group_ = true
+
+[node name="AnchorBody" type="StaticBody2D" parent="ElectricBulbs/PinJointBulb"]
+position = Vector2(0, -10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ElectricBulbs/PinJointBulb/AnchorBody"]
+shape = SubResource("RectangleShape2D_anchor")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="ElectricBulbs/PinJointBulb"]
+position = Vector2(0, 70)
+mass = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ElectricBulbs/PinJointBulb/RigidBody2D"]
+shape = SubResource("CircleShape2D_bulb")
+
+[node name="Sprite2D" type="Sprite2D" parent="ElectricBulbs/PinJointBulb/RigidBody2D"]
+modulate = Color(1, 1, 0.5, 1)
+scale = Vector2(2, 2)
+texture = ExtResource("6_xc2jm")
+
+[node name="BouncySpringBulb" type="DampedSpringJoint2D" parent="ElectricBulbs"]
+position = Vector2(745, -25)
+node_a = NodePath("AnchorBody")
+node_b = NodePath("RigidBody2D")
+rest_length = 60.0
+stiffness = 100.0
+damping = 0.5
+metadata/_edit_group_ = true
+
+[node name="AnchorBody" type="StaticBody2D" parent="ElectricBulbs/BouncySpringBulb"]
+position = Vector2(0, -10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ElectricBulbs/BouncySpringBulb/AnchorBody"]
+shape = SubResource("RectangleShape2D_anchor")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="ElectricBulbs/BouncySpringBulb"]
+position = Vector2(0, 70)
+gravity_scale = 0.7
+linear_damp = 0.1
+angular_damp = 0.2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ElectricBulbs/BouncySpringBulb/RigidBody2D"]
+shape = SubResource("CircleShape2D_bulb")
+
+[node name="Sprite2D" type="Sprite2D" parent="ElectricBulbs/BouncySpringBulb/RigidBody2D"]
+modulate = Color(1, 0.7, 0.3, 1)
+scale = Vector2(2, 2)
+texture = ExtResource("6_xc2jm")
+
+[node name="GrooveJointBulb" type="GrooveJoint2D" parent="ElectricBulbs"]
+position = Vector2(905, -22)
+node_a = NodePath("AnchorBody")
+node_b = NodePath("RigidBody2D")
+length = 120.0
+initial_offset = 50.0
+metadata/_edit_group_ = true
+
+[node name="AnchorBody" type="StaticBody2D" parent="ElectricBulbs/GrooveJointBulb"]
+position = Vector2(0, -10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ElectricBulbs/GrooveJointBulb/AnchorBody"]
+shape = SubResource("RectangleShape2D_anchor")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="ElectricBulbs/GrooveJointBulb"]
+position = Vector2(0, 50)
+gravity_scale = 0.3
+linear_damp = 0.2
+angular_damp = 0.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ElectricBulbs/GrooveJointBulb/RigidBody2D"]
+shape = SubResource("CircleShape2D_bulb")
+
+[node name="Sprite2D" type="Sprite2D" parent="ElectricBulbs/GrooveJointBulb/RigidBody2D"]
+modulate = Color(0.5, 1, 0.8, 1)
+scale = Vector2(2, 2)
+texture = ExtResource("6_xc2jm")
