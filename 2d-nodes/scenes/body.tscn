@@ -1,0 +1,120 @@
+[gd_scene load_steps=7 format=3 uid="uid://bn1xuhyfpftiy"]
+
+[ext_resource type="Script" uid="uid://de2f0b1t0tta4" path="res://scenes/body.gd" id="1_veluv"]
+[ext_resource type="Texture2D" uid="uid://cu1cbkgncd34e" path="res://assets/장판.png" id="2_lgxe7"]
+[ext_resource type="Texture2D" uid="uid://hdynfhrpjraq" path="res://assets/복숭아2.png" id="3_glwu3"]
+
+[sub_resource type="GDScript" id="GDScript_y5ufn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w7va6"]
+size = Vector2(30, 30)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2d31a"]
+radius = 8.0
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_veluv")
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="Platforms"]
+position = Vector2(507.99994, 412.99994)
+scale = Vector2(5, 5)
+script = SubResource("GDScript_y5ufn")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Platforms/AnimatableBody2D"]
+texture = ExtResource("2_lgxe7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/AnimatableBody2D"]
+shape = SubResource("RectangleShape2D_w7va6")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Platforms"]
+position = Vector2(355, 413)
+scale = Vector2(5, 5)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Platforms/StaticBody2D"]
+texture = ExtResource("2_lgxe7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/StaticBody2D"]
+shape = SubResource("RectangleShape2D_w7va6")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Platforms"]
+position = Vector2(662, 413)
+scale = Vector2(5, 5)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Platforms/StaticBody2D3"]
+texture = ExtResource("2_lgxe7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/StaticBody2D3"]
+shape = SubResource("RectangleShape2D_w7va6")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Platforms"]
+position = Vector2(817, 413.00003)
+scale = Vector2(5, 5)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Platforms/StaticBody2D4"]
+texture = ExtResource("2_lgxe7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/StaticBody2D4"]
+shape = SubResource("RectangleShape2D_w7va6")
+
+[node name="Fruits" type="Node2D" parent="."]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="Fruits"]
+position = Vector2(522, 141)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fruits/RigidBody2D"]
+scale = Vector2(2, 2)
+shape = SubResource("CircleShape2D_2d31a")
+
+[node name="Sprite2D" type="Sprite2D" parent="Fruits/RigidBody2D/CollisionShape2D"]
+texture = ExtResource("3_glwu3")
+
+[node name="RigidBody2D2" type="RigidBody2D" parent="Fruits"]
+position = Vector2(538, 93)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fruits/RigidBody2D2"]
+scale = Vector2(2, 2)
+shape = SubResource("CircleShape2D_2d31a")
+
+[node name="Sprite2D" type="Sprite2D" parent="Fruits/RigidBody2D2/CollisionShape2D"]
+texture = ExtResource("3_glwu3")
+
+[node name="RigidBody2D3" type="RigidBody2D" parent="Fruits"]
+position = Vector2(524, 40)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fruits/RigidBody2D3"]
+scale = Vector2(2, 2)
+shape = SubResource("CircleShape2D_2d31a")
+
+[node name="Sprite2D" type="Sprite2D" parent="Fruits/RigidBody2D3/CollisionShape2D"]
+texture = ExtResource("3_glwu3")
+
+[node name="RigidBody2D4" type="RigidBody2D" parent="Fruits"]
+position = Vector2(474, 173)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fruits/RigidBody2D4"]
+scale = Vector2(2, 2)
+shape = SubResource("CircleShape2D_2d31a")
+
+[node name="Sprite2D" type="Sprite2D" parent="Fruits/RigidBody2D4/CollisionShape2D"]
+texture = ExtResource("3_glwu3")
+
+[node name="RigidBody2D5" type="RigidBody2D" parent="Fruits"]
+position = Vector2(485, 81)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fruits/RigidBody2D5"]
+scale = Vector2(2, 2)
+shape = SubResource("CircleShape2D_2d31a")
+
+[node name="Sprite2D" type="Sprite2D" parent="Fruits/RigidBody2D5/CollisionShape2D"]
+texture = ExtResource("3_glwu3")
