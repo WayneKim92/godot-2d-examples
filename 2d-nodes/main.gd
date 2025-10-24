@@ -38,7 +38,7 @@ func _ready():
 	setup_area_detection()
 	
 	# 초기 조명 색상 설정
-	update_lighting_based_on_distance()
+	# update_lighting_based_on_distance()
 
 func _process(delta):
 	time_elapsed += delta
@@ -49,7 +49,7 @@ func _process(delta):
 		groove_joint_bulb.initial_offset = 50.0 + offset_variation
 	
 	# 실시간으로 거리 기반 조명 업데이트
-	update_lighting_based_on_distance()
+	# update_lighting_based_on_distance()
 
 func setup_joint_behaviors():
 	# PinJoint 전구에 초기 임펄스 적용
