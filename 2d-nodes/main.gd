@@ -4,6 +4,8 @@ extends Node2D
 @onready var pin_joint_bulb = $ElectricBulbs/PinJointBulb
 @onready var bouncy_spring_bulb = $ElectricBulbs/BouncySpringBulb
 @onready var groove_joint_bulb = $ElectricBulbs/GrooveJointBulb
+@onready var area_2d = $Area2D
+@onready var status_label = $Area2D/StatusLabel
 
 var tween: Tween
 var original_position: Vector2
@@ -18,6 +20,12 @@ func _ready():
 	
 	# 조인트별 특별한 설정 적용
 	setup_joint_behaviors()
+	
+	# Area2D 신호 연결
+	setup_area_detection()
+	
+	# 초기 위치에서 캐릭터가 영역 안에 있는지 체크
+	check_initial_position()
 
 func _process(delta):
 	time_elapsed += delta
@@ -110,3 +118,33 @@ func shake_all_bulbs():
 	apply_impulse_to_bulb(bouncy_spring_bulb)
 	apply_impulse_to_bulb(groove_joint_bulb)
 	print("All bulbs shaken!")
+
+# Area2D 감지 설정
+func setup_area_detection():
+	if area_2d:
+		area_2d.body_entered.connect(_on_area_2d_body_entered)
+		area_2d.body_exited.connect(_on_area_2d_body_exited)
+		print("Area2D 감지 시스템 초기화 완료")
+
+# 초기 위치에서 캐릭터가 영역 안에 있는지 체크
+func check_initial_position():
+	var character = get_node("CharacterBody2D")
+	if area_2d and character:
+		if area_2d.overlaps_body(character):
+			status_label.text = "캐릭터가 영역 안에 진입했습니다!"
+			status_label.modulate = Color.GREEN
+		else:
+			status_label.text = "캐릭터가 영역 밖에 있습니다!"
+			status_label.modulate = Color.RED
+
+# 캐릭터가 Area2D에 진입했을 때
+func _on_area_2d_body_entered(body):
+	if body.name == "CharacterBody2D":
+		status_label.text = "캐릭터가 영역 안에 진입했습니다!"
+		status_label.modulate = Color.GREEN
+
+# 캐릭터가 Area2D에서 나갔을 때
+func _on_area_2d_body_exited(body):
+	if body.name == "CharacterBody2D":
+		status_label.text = "캐릭터가 영역 빡에 진입했습니다!"
+		status_label.modulate = Color.RED

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bn1xuhyfpftiy"]
+[gd_scene load_steps=14 format=3 uid="uid://bn1xuhyfpftiy"]
 
 [ext_resource type="Script" uid="uid://de2f0b1t0tta4" path="res://main.gd" id="1_tefeu"]
 [ext_resource type="Texture2D" uid="uid://cu1cbkgncd34e" path="res://assets/장판.png" id="2_o6xl0"]
@@ -24,6 +24,9 @@ size = Vector2(20, 10)
 [sub_resource type="CircleShape2D" id="CircleShape2D_bulb"]
 radius = 15.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7mycd"]
+size = Vector2(230, 242)
+
 [node name="Main" type="Node2D"]
 script = ExtResource("1_tefeu")
 
@@ -31,7 +34,7 @@ script = ExtResource("1_tefeu")
 metadata/_edit_lock_ = true
 
 [node name="AnimatableBody2D" type="AnimatableBody2D" parent="Platforms"]
-position = Vector2(507.99994, 412.99994)
+position = Vector2(510.9999, 550.99994)
 scale = Vector2(5, 5)
 script = SubResource("GDScript_y5ufn")
 metadata/_edit_group_ = true
@@ -43,7 +46,7 @@ texture = ExtResource("2_o6xl0")
 shape = SubResource("RectangleShape2D_w7va6")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Platforms"]
-position = Vector2(355, 413)
+position = Vector2(357.99997, 551)
 scale = Vector2(5, 5)
 metadata/_edit_group_ = true
 
@@ -54,7 +57,7 @@ texture = ExtResource("2_o6xl0")
 shape = SubResource("RectangleShape2D_w7va6")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="Platforms"]
-position = Vector2(662, 413)
+position = Vector2(664.99994, 551)
 scale = Vector2(5, 5)
 metadata/_edit_group_ = true
 
@@ -65,7 +68,7 @@ texture = ExtResource("2_o6xl0")
 shape = SubResource("RectangleShape2D_w7va6")
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="Platforms"]
-position = Vector2(817, 413.00003)
+position = Vector2(819.99994, 551)
 scale = Vector2(5, 5)
 metadata/_edit_group_ = true
 
@@ -76,7 +79,7 @@ texture = ExtResource("2_o6xl0")
 shape = SubResource("RectangleShape2D_w7va6")
 
 [node name="AnimatableBody2D2" type="AnimatableBody2D" parent="Platforms"]
-position = Vector2(203.00003, 412.99994)
+position = Vector2(206, 550.99994)
 scale = Vector2(5, 5)
 script = SubResource("GDScript_y5ufn")
 metadata/_edit_group_ = true
@@ -88,7 +91,7 @@ texture = ExtResource("2_o6xl0")
 shape = SubResource("RectangleShape2D_w7va6")
 
 [node name="AnimatableBody2D3" type="AnimatableBody2D" parent="Platforms"]
-position = Vector2(972, 412.99994)
+position = Vector2(974.99994, 550.99994)
 scale = Vector2(5, 5)
 script = SubResource("GDScript_y5ufn")
 metadata/_edit_group_ = true
@@ -103,7 +106,7 @@ shape = SubResource("RectangleShape2D_w7va6")
 metadata/_edit_lock_ = true
 
 [node name="RigidBody2D" type="RigidBody2D" parent="Fruits"]
-position = Vector2(522, 141)
+position = Vector2(536, 186)
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Fruits/RigidBody2D"]
@@ -158,7 +161,7 @@ shape = SubResource("CircleShape2D_2d31a")
 texture = ExtResource("3_tipki")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-position = Vector2(354, 251)
+position = Vector2(356.99997, 389)
 script = ExtResource("4_85g3d")
 metadata/_edit_group_ = true
 
@@ -172,7 +175,7 @@ texture = ExtResource("5_choun")
 flip_h = true
 
 [node name="ElectricBulbs" type="Node2D" parent="."]
-position = Vector2(62, 74)
+metadata/_edit_lock_ = true
 
 [node name="PinJointBulb" type="PinJoint2D" parent="ElectricBulbs"]
 position = Vector2(604, 74)
@@ -199,7 +202,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("6_ya4ey")
 
 [node name="BouncySpringBulb" type="DampedSpringJoint2D" parent="ElectricBulbs"]
-position = Vector2(745, -25)
+position = Vector2(758, 46)
 node_a = NodePath("AnchorBody")
 node_b = NodePath("RigidBody2D")
 rest_length = 60.0
@@ -228,7 +231,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("6_ya4ey")
 
 [node name="GrooveJointBulb" type="GrooveJoint2D" parent="ElectricBulbs"]
-position = Vector2(905, -22)
+position = Vector2(918, 49)
 node_a = NodePath("AnchorBody")
 node_b = NodePath("RigidBody2D")
 length = 120.0
@@ -254,3 +257,25 @@ shape = SubResource("CircleShape2D_bulb")
 modulate = Color(0.5, 1, 0.8, 1)
 scale = Vector2(2, 2)
 texture = ExtResource("6_ya4ey")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(941, 353)
+metadata/_edit_group_ = true
+
+[node name="StatusLabel" type="Label" parent="Area2D"]
+offset_left = -109.0
+offset_top = -147.0
+offset_right = 141.0
+offset_bottom = -97.0
+text = "범위 내에 캐릭터 유무"
+
+[node name="ColorRect" type="ColorRect" parent="Area2D"]
+offset_left = -115.0
+offset_top = -121.0
+offset_right = 115.0
+offset_bottom = 121.0
+color = Color(1, 1, 0, 0.3)
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_7mycd")
