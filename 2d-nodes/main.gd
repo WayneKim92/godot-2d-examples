@@ -1,19 +1,32 @@
 extends Node2D
 
-@onready var animatable_body = $Platforms/AnimatableBody2D
-@onready var pin_joint_bulb = $ElectricBulbs/PinJointBulb
-@onready var bouncy_spring_bulb = $ElectricBulbs/BouncySpringBulb
-@onready var groove_joint_bulb = $ElectricBulbs/GrooveJointBulb
-@onready var area_2d = $Area2D
-@onready var status_label = $Area2D/StatusLabel
+# Unique Name (%) 사용 - 계층구조 변경에 독립적! ⭐
+@onready var animatable_body = %AnimatableBody2D
+@onready var pin_joint_bulb = %PinJointBulb
+@onready var bouncy_spring_bulb = %BouncySpringBulb
+@onready var groove_joint_bulb = %GrooveJointBulb
+@onready var area_2d = %Area2D
+@onready var status_label = %StatusLabel
+@onready var canvas_modulate = $CanvasModulate
+@onready var character_body = $CharacterBody2D
 
 var tween: Tween
 var original_position: Vector2
 var time_elapsed: float = 0.0
 
+# 조명 색상 상수
+const COLOR_OUTSIDE = Color("#454545")  # 어두운 색상
+const COLOR_INSIDE = Color("#ffffff")   # 밝은 색상
+
+# Area2D 크기 (씬에서 설정된 크기와 일치시켜야 함)
+var area_radius: float = 0.0
+
 func _ready():
 	# 원본 위치 저장
 	original_position = animatable_body.position
+	
+	# Area2D 반경 계산
+	calculate_area_radius()
 	
 	# 애니메이션 시작
 	start_position_animation()
@@ -24,8 +37,8 @@ func _ready():
 	# Area2D 신호 연결
 	setup_area_detection()
 	
-	# 초기 위치에서 캐릭터가 영역 안에 있는지 체크
-	check_initial_position()
+	# 초기 조명 색상 설정
+	update_lighting_based_on_distance()
 
 func _process(delta):
 	time_elapsed += delta
@@ -34,6 +47,9 @@ func _process(delta):
 	if groove_joint_bulb:
 		var offset_variation = sin(time_elapsed * 0.3) * 20.0
 		groove_joint_bulb.initial_offset = 50.0 + offset_variation
+	
+	# 실시간으로 거리 기반 조명 업데이트
+	update_lighting_based_on_distance()
 
 func setup_joint_behaviors():
 	# PinJoint 전구에 초기 임펄스 적용
@@ -62,7 +78,7 @@ func start_position_animation():
 	
 	# 새 트윈 생성
 	tween = create_tween()
-	tween.set_loops() # 무한 반복
+	tween.set_loops() # 무한 반복ㅎ
 	
 	# y 위치를 원본에서 50픽셀 위로 올렸다가 다시 내리기 (1초 동안)
 	tween.tween_property(animatable_body, "position:y", original_position.y - 100, 0.5)
@@ -126,25 +142,61 @@ func setup_area_detection():
 		area_2d.body_exited.connect(_on_area_2d_body_exited)
 		print("Area2D 감지 시스템 초기화 완료")
 
-# 초기 위치에서 캐릭터가 영역 안에 있는지 체크
-func check_initial_position():
-	var character = get_node("CharacterBody2D")
-	if area_2d and character:
-		if area_2d.overlaps_body(character):
-			status_label.text = "캐릭터가 영역 안에 진입했습니다!"
-			status_label.modulate = Color.GREEN
-		else:
-			status_label.text = "캐릭터가 영역 밖에 있습니다!"
-			status_label.modulate = Color.RED
+# Area2D의 반경 계산
+func calculate_area_radius():
+	if area_2d and area_2d.get_node("CollisionShape2D"):
+		var collision_shape = area_2d.get_node("CollisionShape2D")
+		var shape = collision_shape.shape
+		
+		if shape is RectangleShape2D:
+			var rect_shape = shape as RectangleShape2D
+			# 사각형의 경우 대각선의 절반을 반경으로 사용
+			area_radius = rect_shape.size.length() / 2.0
+		elif shape is CircleShape2D:
+			var circle_shape = shape as CircleShape2D
+			area_radius = circle_shape.radius
+		
+		print("Area2D 반경: ", area_radius)
+
+# 거리 기반으로 조명 업데이트
+func update_lighting_based_on_distance():
+	if not area_2d or not character_body or not canvas_modulate:
+		return
+	
+	# Area2D 중심과 캐릭터 사이의 거리 계산
+	var area_center = area_2d.global_position
+	var character_position = character_body.global_position
+	var distance = area_center.distance_to(character_position)
+	
+	# 거리를 0~1 범위로 정규화 (0 = 중심, 1 = 반경 밖)
+	var normalized_distance = clamp(distance / area_radius, 0.0, 1.0)
+	
+	# 거리에 따라 색상 보간 (lerp)
+	# normalized_distance가 0이면 밝은 색, 1이면 어두운 색
+	var target_color = COLOR_INSIDE.lerp(COLOR_OUTSIDE, normalized_distance)
+	canvas_modulate.color = target_color
+	
+	# 상태 라벨 업데이트
+	update_status_label(normalized_distance)
+
+# 상태 라벨 업데이트
+func update_status_label(normalized_distance: float):
+	if normalized_distance < 0.3:
+		status_label.text = "캐릭터가 영역 중심에 있습니다!"
+		status_label.modulate = Color.GREEN
+	elif normalized_distance < 1.0:
+		status_label.text = "캐릭터가 영역 가장자리에 있습니다!"
+		status_label.modulate = Color.YELLOW
+	else:
+		status_label.text = "캐릭터가 영역 밖에 있습니다!"
+		status_label.modulate = Color.RED
 
 # 캐릭터가 Area2D에 진입했을 때
 func _on_area_2d_body_entered(body):
 	if body.name == "CharacterBody2D":
-		status_label.text = "캐릭터가 영역 안에 진입했습니다!"
-		status_label.modulate = Color.GREEN
+		pass  # 실시간 업데이트로 처리됨
 
 # 캐릭터가 Area2D에서 나갔을 때
 func _on_area_2d_body_exited(body):
 	if body.name == "CharacterBody2D":
-		status_label.text = "캐릭터가 영역 빡에 진입했습니다!"
-		status_label.modulate = Color.RED
+		pass  # 실시간 업데이트로 처리됨

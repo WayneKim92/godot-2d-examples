@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bn1xuhyfpftiy"]
+[gd_scene load_steps=15 format=3 uid="uid://bn1xuhyfpftiy"]
 
 [ext_resource type="Script" uid="uid://de2f0b1t0tta4" path="res://main.gd" id="1_tefeu"]
 [ext_resource type="Texture2D" uid="uid://cu1cbkgncd34e" path="res://assets/장판.png" id="2_o6xl0"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://doypb3ma373hw" path="res://character_controller.gd" id="4_85g3d"]
 [ext_resource type="Texture2D" uid="uid://bpr1ep7qx1wp7" path="res://assets/Man-side.png" id="5_choun"]
 [ext_resource type="Texture2D" uid="uid://bhbwcjkqn0gtq" path="res://assets/전구.png" id="6_ya4ey"]
+[ext_resource type="Script" uid="uid://c87whe0whkbvl" path="res://area_with_visual.gd" id="7_area_script"]
 
 [sub_resource type="GDScript" id="GDScript_y5ufn"]
 
@@ -25,7 +26,7 @@ size = Vector2(20, 10)
 radius = 15.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7mycd"]
-size = Vector2(230, 242)
+size = Vector2(459.5, 242)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_tefeu")
@@ -34,6 +35,7 @@ script = ExtResource("1_tefeu")
 metadata/_edit_lock_ = true
 
 [node name="AnimatableBody2D" type="AnimatableBody2D" parent="Platforms"]
+unique_name_in_owner = true
 position = Vector2(510.9999, 550.99994)
 scale = Vector2(5, 5)
 script = SubResource("GDScript_y5ufn")
@@ -178,6 +180,7 @@ flip_h = true
 metadata/_edit_lock_ = true
 
 [node name="PinJointBulb" type="PinJoint2D" parent="ElectricBulbs"]
+unique_name_in_owner = true
 position = Vector2(604, 74)
 node_a = NodePath("AnchorBody")
 node_b = NodePath("RigidBody2D")
@@ -202,6 +205,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("6_ya4ey")
 
 [node name="BouncySpringBulb" type="DampedSpringJoint2D" parent="ElectricBulbs"]
+unique_name_in_owner = true
 position = Vector2(758, 46)
 node_a = NodePath("AnchorBody")
 node_b = NodePath("RigidBody2D")
@@ -231,6 +235,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("6_ya4ey")
 
 [node name="GrooveJointBulb" type="GrooveJoint2D" parent="ElectricBulbs"]
+unique_name_in_owner = true
 position = Vector2(918, 49)
 node_a = NodePath("AnchorBody")
 node_b = NodePath("RigidBody2D")
@@ -259,23 +264,30 @@ scale = Vector2(2, 2)
 texture = ExtResource("6_ya4ey")
 
 [node name="Area2D" type="Area2D" parent="."]
-position = Vector2(941, 353)
+unique_name_in_owner = true
+position = Vector2(820, 355)
+script = ExtResource("7_area_script")
 metadata/_edit_group_ = true
 
-[node name="StatusLabel" type="Label" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(3.75, -1)
+shape = SubResource("RectangleShape2D_7mycd")
+
+[node name="StatusLabel" type="Label" parent="Area2D/CollisionShape2D"]
+unique_name_in_owner = true
 offset_left = -109.0
 offset_top = -147.0
 offset_right = 141.0
 offset_bottom = -97.0
 text = "범위 내에 캐릭터 유무"
 
-[node name="ColorRect" type="ColorRect" parent="Area2D"]
-offset_left = -115.0
+[node name="ColorRect" type="ColorRect" parent="Area2D/CollisionShape2D"]
+offset_left = -229.75
 offset_top = -121.0
-offset_right = 115.0
+offset_right = 229.75
 offset_bottom = 121.0
+size_flags_horizontal = 3
 color = Color(1, 1, 0, 0.3)
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_7mycd")
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
