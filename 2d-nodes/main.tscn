@@ -1,11 +1,11 @@
 [gd_scene load_steps=13 format=3 uid="uid://bn1xuhyfpftiy"]
 
-[ext_resource type="Script" uid="uid://de2f0b1t0tta4" path="res://scenes/body.gd" id="1_veluv"]
-[ext_resource type="Texture2D" uid="uid://cu1cbkgncd34e" path="res://assets/장판.png" id="2_lgxe7"]
-[ext_resource type="Texture2D" uid="uid://hdynfhrpjraq" path="res://assets/복숭아2.png" id="3_glwu3"]
-[ext_resource type="Script" uid="uid://doypb3ma373hw" path="res://scenes/character_controller.gd" id="4_glwu3"]
-[ext_resource type="Texture2D" uid="uid://bpr1ep7qx1wp7" path="res://assets/Man-side.png" id="4_lgxe7"]
-[ext_resource type="Texture2D" uid="uid://bhbwcjkqn0gtq" path="res://assets/전구.png" id="6_xc2jm"]
+[ext_resource type="Script" uid="uid://de2f0b1t0tta4" path="res://main.gd" id="1_tefeu"]
+[ext_resource type="Texture2D" uid="uid://cu1cbkgncd34e" path="res://assets/장판.png" id="2_o6xl0"]
+[ext_resource type="Texture2D" uid="uid://hdynfhrpjraq" path="res://assets/복숭아2.png" id="3_tipki"]
+[ext_resource type="Script" uid="uid://doypb3ma373hw" path="res://character_controller.gd" id="4_85g3d"]
+[ext_resource type="Texture2D" uid="uid://bpr1ep7qx1wp7" path="res://assets/Man-side.png" id="5_choun"]
+[ext_resource type="Texture2D" uid="uid://bhbwcjkqn0gtq" path="res://assets/전구.png" id="6_ya4ey"]
 
 [sub_resource type="GDScript" id="GDScript_y5ufn"]
 
@@ -25,7 +25,7 @@ size = Vector2(20, 10)
 radius = 15.0
 
 [node name="Main" type="Node2D"]
-script = ExtResource("1_veluv")
+script = ExtResource("1_tefeu")
 
 [node name="Platforms" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
@@ -37,7 +37,7 @@ script = SubResource("GDScript_y5ufn")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Platforms/AnimatableBody2D"]
-texture = ExtResource("2_lgxe7")
+texture = ExtResource("2_o6xl0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/AnimatableBody2D"]
 shape = SubResource("RectangleShape2D_w7va6")
@@ -48,7 +48,7 @@ scale = Vector2(5, 5)
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Platforms/StaticBody2D"]
-texture = ExtResource("2_lgxe7")
+texture = ExtResource("2_o6xl0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/StaticBody2D"]
 shape = SubResource("RectangleShape2D_w7va6")
@@ -59,7 +59,7 @@ scale = Vector2(5, 5)
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Platforms/StaticBody2D3"]
-texture = ExtResource("2_lgxe7")
+texture = ExtResource("2_o6xl0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/StaticBody2D3"]
 shape = SubResource("RectangleShape2D_w7va6")
@@ -70,7 +70,7 @@ scale = Vector2(5, 5)
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Platforms/StaticBody2D4"]
-texture = ExtResource("2_lgxe7")
+texture = ExtResource("2_o6xl0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/StaticBody2D4"]
 shape = SubResource("RectangleShape2D_w7va6")
@@ -82,7 +82,7 @@ script = SubResource("GDScript_y5ufn")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Platforms/AnimatableBody2D2"]
-texture = ExtResource("2_lgxe7")
+texture = ExtResource("2_o6xl0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/AnimatableBody2D2"]
 shape = SubResource("RectangleShape2D_w7va6")
@@ -94,7 +94,7 @@ script = SubResource("GDScript_y5ufn")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Platforms/AnimatableBody2D3"]
-texture = ExtResource("2_lgxe7")
+texture = ExtResource("2_o6xl0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/AnimatableBody2D3"]
 shape = SubResource("RectangleShape2D_w7va6")
@@ -111,7 +111,7 @@ scale = Vector2(2, 2)
 shape = SubResource("CircleShape2D_2d31a")
 
 [node name="Sprite2D" type="Sprite2D" parent="Fruits/RigidBody2D/CollisionShape2D"]
-texture = ExtResource("3_glwu3")
+texture = ExtResource("3_tipki")
 
 [node name="RigidBody2D2" type="RigidBody2D" parent="Fruits"]
 position = Vector2(538, 93)
@@ -122,7 +122,7 @@ scale = Vector2(2, 2)
 shape = SubResource("CircleShape2D_2d31a")
 
 [node name="Sprite2D" type="Sprite2D" parent="Fruits/RigidBody2D2/CollisionShape2D"]
-texture = ExtResource("3_glwu3")
+texture = ExtResource("3_tipki")
 
 [node name="RigidBody2D3" type="RigidBody2D" parent="Fruits"]
 position = Vector2(524, 40)
@@ -133,7 +133,7 @@ scale = Vector2(2, 2)
 shape = SubResource("CircleShape2D_2d31a")
 
 [node name="Sprite2D" type="Sprite2D" parent="Fruits/RigidBody2D3/CollisionShape2D"]
-texture = ExtResource("3_glwu3")
+texture = ExtResource("3_tipki")
 
 [node name="RigidBody2D4" type="RigidBody2D" parent="Fruits"]
 position = Vector2(474, 173)
@@ -144,7 +144,7 @@ scale = Vector2(2, 2)
 shape = SubResource("CircleShape2D_2d31a")
 
 [node name="Sprite2D" type="Sprite2D" parent="Fruits/RigidBody2D4/CollisionShape2D"]
-texture = ExtResource("3_glwu3")
+texture = ExtResource("3_tipki")
 
 [node name="RigidBody2D5" type="RigidBody2D" parent="Fruits"]
 position = Vector2(485, 81)
@@ -155,11 +155,11 @@ scale = Vector2(2, 2)
 shape = SubResource("CircleShape2D_2d31a")
 
 [node name="Sprite2D" type="Sprite2D" parent="Fruits/RigidBody2D5/CollisionShape2D"]
-texture = ExtResource("3_glwu3")
+texture = ExtResource("3_tipki")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 position = Vector2(354, 251)
-script = ExtResource("4_glwu3")
+script = ExtResource("4_85g3d")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
@@ -168,7 +168,7 @@ scale = Vector2(5, 5)
 shape = SubResource("RectangleShape2D_lgxe7")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D/CollisionShape2D"]
-texture = ExtResource("4_lgxe7")
+texture = ExtResource("5_choun")
 flip_h = true
 
 [node name="ElectricBulbs" type="Node2D" parent="."]
@@ -187,7 +187,7 @@ position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_anchor")
 
 [node name="RigidBody2D" type="RigidBody2D" parent="ElectricBulbs/PinJointBulb"]
-position = Vector2(0, 70)
+position = Vector2(0, 12)
 mass = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ElectricBulbs/PinJointBulb/RigidBody2D"]
@@ -196,7 +196,7 @@ shape = SubResource("CircleShape2D_bulb")
 [node name="Sprite2D" type="Sprite2D" parent="ElectricBulbs/PinJointBulb/RigidBody2D"]
 modulate = Color(1, 1, 0.5, 1)
 scale = Vector2(2, 2)
-texture = ExtResource("6_xc2jm")
+texture = ExtResource("6_ya4ey")
 
 [node name="BouncySpringBulb" type="DampedSpringJoint2D" parent="ElectricBulbs"]
 position = Vector2(745, -25)
@@ -225,7 +225,7 @@ shape = SubResource("CircleShape2D_bulb")
 [node name="Sprite2D" type="Sprite2D" parent="ElectricBulbs/BouncySpringBulb/RigidBody2D"]
 modulate = Color(1, 0.7, 0.3, 1)
 scale = Vector2(2, 2)
-texture = ExtResource("6_xc2jm")
+texture = ExtResource("6_ya4ey")
 
 [node name="GrooveJointBulb" type="GrooveJoint2D" parent="ElectricBulbs"]
 position = Vector2(905, -22)
@@ -253,4 +253,4 @@ shape = SubResource("CircleShape2D_bulb")
 [node name="Sprite2D" type="Sprite2D" parent="ElectricBulbs/GrooveJointBulb/RigidBody2D"]
 modulate = Color(0.5, 1, 0.8, 1)
 scale = Vector2(2, 2)
-texture = ExtResource("6_xc2jm")
+texture = ExtResource("6_ya4ey")
