@@ -298,23 +298,6 @@ color = Color(0.38170326, 0.38170323, 0.38170323, 1)
 [node name="Lights" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="Lights"]
-position = Vector2(130, 100.00001)
-scale = Vector2(5, 5)
-metadata/_edit_group_ = true
-
-[node name="Sprite2D" type="Sprite2D" parent="Lights/StaticBody2D2"]
-texture = ExtResource("2_o6xl0")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Lights/StaticBody2D2"]
-shape = SubResource("RectangleShape2D_w7va6")
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="Lights/StaticBody2D2"]
-position = Vector2(-49.999996, -47.399998)
-scale = Vector2(0.19999999, 0.19999999)
-occluder = SubResource("OccluderPolygon2D_272bh")
-metadata/_edit_group_ = true
-
 [node name="BouncySpringBulb" type="DampedSpringJoint2D" parent="Lights"]
 position = Vector2(765, 9)
 node_a = NodePath("AnchorBody")
@@ -352,9 +335,28 @@ shadow_enabled = true
 texture = ExtResource("6_ya4ey")
 texture_scale = 50.0
 
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="Lights"]
-position = Vector2(534, -300)
-scale = Vector2(0.2168413, 1.3808174)
+[node name="AnimatableBodyWithLight" type="AnimatableBody2D" parent="Lights"]
+unique_name_in_owner = true
+position = Vector2(129.00002, 110)
+scale = Vector2(5, 5)
+script = SubResource("GDScript_y5ufn")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Lights/AnimatableBodyWithLight"]
+texture = ExtResource("2_o6xl0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lights/AnimatableBodyWithLight"]
+shape = SubResource("RectangleShape2D_w7va6")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Lights/AnimatableBodyWithLight"]
+position = Vector2(-50.800003, -47.999996)
+scale = Vector2(0.19999997, 0.19999997)
+occluder = SubResource("OccluderPolygon2D_272bh")
+metadata/_edit_group_ = true
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="Lights/AnimatableBodyWithLight"]
+position = Vector2(79.99999, -80.6)
+scale = Vector2(0.043368258, 0.27616346)
 color = Color(0.26475334, 0.26475334, 0.26475334, 1)
 shadow_enabled = true
 metadata/_edit_group_ = true

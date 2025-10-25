@@ -9,10 +9,13 @@ extends Node2D
 @onready var status_label = %StatusLabel
 @onready var canvas_modulate = %CanvasModulate
 @onready var character_body = $CharacterBody2D
+@onready var animatable_body_with = %AnimatableBodyWithLight
 
-var tween: Tween
-var original_position: Vector2
 var time_elapsed: float = 0.0
+# 각 노드의 원본 위치를 저장하는 딕셔너리
+var original_positions: Dictionary = {}
+# 각 노드의 tween을 저장하는 딕셔너리
+var tweens: Dictionary = {}
 
 # 조명 색상 상수
 const COLOR_OUTSIDE = Color("#454545")  # 어두운 색상
@@ -22,14 +25,13 @@ const COLOR_INSIDE = Color("#ffffff")   # 밝은 색상
 var area_radius: float = 0.0
 
 func _ready():
-	# 원본 위치 저장
-	original_position = animatable_body.position
-	
 	# Area2D 반경 계산
 	calculate_area_radius()
 	
 	# 애니메이션 시작
-	start_position_animation()
+	# 원본 위치 저장
+	start_position_animation(animatable_body)
+	start_position_animation(animatable_body_with, Vector2(100, 0))
 	
 	# 조인트별 특별한 설정 적용
 	setup_joint_behaviors()
@@ -71,18 +73,26 @@ func setup_joint_behaviors():
 		await get_tree().create_timer(0.3).timeout
 		groove_body.apply_impulse(Vector2(80, 0))
 
-func start_position_animation():
-	# 기존 트윈이 있으면 중지
-	if tween:
-		tween.kill()
+func start_position_animation(node, direction: Vector2 = Vector2(0, -100)):
+	# 처음 호출 시 원본 위치 저장
+	if not original_positions.has(node):
+		original_positions[node] = node.position
 	
-	# 새 트윈 생성
-	tween = create_tween()
+	# 해당 노드의 기존 트윈이 있으면 중지
+	if tweens.has(node) and tweens[node]:
+		tweens[node].kill()
+	
+	# 새 트윈 생성 및 저장
+	var tween = create_tween()
+	tweens[node] = tween
 	tween.set_loops() # 무한 반복ㅎ
 	
-	# y 위치를 원본에서 50픽셀 위로 올렸다가 다시 내리기 (1초 동안)
-	tween.tween_property(animatable_body, "position:y", original_position.y - 100, 0.5)
-	tween.tween_property(animatable_body, "position:y", original_position.y, 0.5)
+	# 저장된 원본 위치 사용
+	var original_position = original_positions[node]
+	# 지정된 방향으로 이동했다가 다시 돌아오기 (1초 동안)
+	var target_position = original_position + direction
+	tween.tween_property(node, "position", target_position, 0.5)
+	tween.tween_property(node, "position", original_position, 0.5)
 	
 	# 트윈 설정 (부드러운 애니메이션을 위한 이징)
 	tween.set_ease(Tween.EASE_IN_OUT)
