@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bn1xuhyfpftiy"]
+[gd_scene load_steps=16 format=3 uid="uid://bn1xuhyfpftiy"]
 
 [ext_resource type="Script" uid="uid://de2f0b1t0tta4" path="res://main.gd" id="1_tefeu"]
 [ext_resource type="Texture2D" uid="uid://cu1cbkgncd34e" path="res://assets/장판.png" id="2_o6xl0"]
@@ -27,6 +27,9 @@ radius = 15.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7mycd"]
 size = Vector2(459.5, 242)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_272bh"]
+polygon = PackedVector2Array(176.99998, 163.99998, 327, 160.99998, 326, 316, 177.99998, 312)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_tefeu")
@@ -80,28 +83,26 @@ texture = ExtResource("2_o6xl0")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/StaticBody2D4"]
 shape = SubResource("RectangleShape2D_w7va6")
 
-[node name="AnimatableBody2D2" type="AnimatableBody2D" parent="Platforms"]
-position = Vector2(206, 550.99994)
+[node name="StaticBody2D2" type="StaticBody2D" parent="Platforms"]
+position = Vector2(208.00002, 551)
 scale = Vector2(5, 5)
-script = SubResource("GDScript_y5ufn")
 metadata/_edit_group_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Platforms/AnimatableBody2D2"]
+[node name="Sprite2D" type="Sprite2D" parent="Platforms/StaticBody2D2"]
 texture = ExtResource("2_o6xl0")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/AnimatableBody2D2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/StaticBody2D2"]
 shape = SubResource("RectangleShape2D_w7va6")
 
-[node name="AnimatableBody2D3" type="AnimatableBody2D" parent="Platforms"]
-position = Vector2(974.99994, 550.99994)
+[node name="StaticBody2D5" type="StaticBody2D" parent="Platforms"]
+position = Vector2(969, 551)
 scale = Vector2(5, 5)
-script = SubResource("GDScript_y5ufn")
 metadata/_edit_group_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Platforms/AnimatableBody2D3"]
+[node name="Sprite2D" type="Sprite2D" parent="Platforms/StaticBody2D5"]
 texture = ExtResource("2_o6xl0")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/AnimatableBody2D3"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/StaticBody2D5"]
 shape = SubResource("RectangleShape2D_w7va6")
 
 [node name="Fruits" type="Node2D" parent="."]
@@ -206,7 +207,7 @@ texture = ExtResource("6_ya4ey")
 
 [node name="BouncySpringBulb" type="DampedSpringJoint2D" parent="ElectricBulbs"]
 unique_name_in_owner = true
-position = Vector2(758, 46)
+position = Vector2(1065, 39)
 node_a = NodePath("AnchorBody")
 node_b = NodePath("RigidBody2D")
 rest_length = 60.0
@@ -233,14 +234,6 @@ shape = SubResource("CircleShape2D_bulb")
 modulate = Color(1, 0.7, 0.3, 1)
 scale = Vector2(2, 2)
 texture = ExtResource("6_ya4ey")
-
-[node name="PointLight2D" type="PointLight2D" parent="ElectricBulbs/BouncySpringBulb/RigidBody2D"]
-position = Vector2(-1, 1)
-color = Color(1, 1, 0.7, 1)
-energy = 1.5
-shadow_enabled = true
-texture = ExtResource("6_ya4ey")
-texture_scale = 50.0
 
 [node name="GrooveJointBulb" type="GrooveJoint2D" parent="ElectricBulbs"]
 unique_name_in_owner = true
@@ -299,4 +292,69 @@ color = Color(1, 1, 0, 0.3)
 metadata/_edit_lock_ = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+unique_name_in_owner = true
 color = Color(0.38170326, 0.38170323, 0.38170323, 1)
+
+[node name="Lights" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Lights"]
+position = Vector2(130, 100.00001)
+scale = Vector2(5, 5)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Lights/StaticBody2D2"]
+texture = ExtResource("2_o6xl0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lights/StaticBody2D2"]
+shape = SubResource("RectangleShape2D_w7va6")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Lights/StaticBody2D2"]
+position = Vector2(-49.999996, -47.399998)
+scale = Vector2(0.19999999, 0.19999999)
+occluder = SubResource("OccluderPolygon2D_272bh")
+metadata/_edit_group_ = true
+
+[node name="BouncySpringBulb" type="DampedSpringJoint2D" parent="Lights"]
+position = Vector2(765, 9)
+node_a = NodePath("AnchorBody")
+node_b = NodePath("RigidBody2D")
+rest_length = 60.0
+stiffness = 100.0
+damping = 0.5
+metadata/_edit_group_ = true
+
+[node name="AnchorBody" type="StaticBody2D" parent="Lights/BouncySpringBulb"]
+position = Vector2(0, -10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lights/BouncySpringBulb/AnchorBody"]
+shape = SubResource("RectangleShape2D_anchor")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="Lights/BouncySpringBulb"]
+position = Vector2(0, 70)
+gravity_scale = 0.7
+linear_damp = 0.1
+angular_damp = 0.2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lights/BouncySpringBulb/RigidBody2D"]
+shape = SubResource("CircleShape2D_bulb")
+
+[node name="Sprite2D" type="Sprite2D" parent="Lights/BouncySpringBulb/RigidBody2D"]
+modulate = Color(1, 0.7, 0.3, 1)
+scale = Vector2(2, 2)
+texture = ExtResource("6_ya4ey")
+
+[node name="PointLight2D" type="PointLight2D" parent="Lights/BouncySpringBulb/RigidBody2D"]
+position = Vector2(-1, 1)
+color = Color(1, 1, 0.7, 1)
+energy = 1.5
+shadow_enabled = true
+texture = ExtResource("6_ya4ey")
+texture_scale = 50.0
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="Lights"]
+position = Vector2(534, -300)
+scale = Vector2(0.2168413, 1.3808174)
+color = Color(0.26475334, 0.26475334, 0.26475334, 1)
+shadow_enabled = true
+metadata/_edit_group_ = true
