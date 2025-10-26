@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bn1xuhyfpftiy"]
+[gd_scene load_steps=18 format=3 uid="uid://bn1xuhyfpftiy"]
 
 [ext_resource type="Script" uid="uid://de2f0b1t0tta4" path="res://main.gd" id="1_tefeu"]
 [ext_resource type="Texture2D" uid="uid://cu1cbkgncd34e" path="res://assets/장판.png" id="2_o6xl0"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bpr1ep7qx1wp7" path="res://assets/Man-side.png" id="5_choun"]
 [ext_resource type="Texture2D" uid="uid://bhbwcjkqn0gtq" path="res://assets/전구.png" id="6_ya4ey"]
 [ext_resource type="Script" uid="uid://c87whe0whkbvl" path="res://area_with_visual.gd" id="7_area_script"]
+[ext_resource type="Script" uid="uid://ctaq0cn8trabb" path="res://line_with_collision.gd" id="8_line_collision"]
 
 [sub_resource type="GDScript" id="GDScript_y5ufn"]
 
@@ -370,7 +371,8 @@ metadata/_edit_group_ = true
 [node name="Line2D" type="Line2D" parent="Lines"]
 position = Vector2(495, 33)
 scale = Vector2(1, 0.9291045)
-points = PackedVector2Array(-14, 8, 96, 80, -25, 202, 135, 256)
+points = PackedVector2Array(-14, 8, 130.99997, 113.01204, -113, 128.08032, 184.99997, 321.81525)
 width_curve = SubResource("Curve_272bh")
 joint_mode = 1
 begin_cap_mode = 1
+script = ExtResource("8_line_collision")
