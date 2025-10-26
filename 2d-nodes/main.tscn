@@ -366,6 +366,8 @@ color = Color(0.26475334, 0.26475334, 0.26475334, 1)
 shadow_enabled = true
 metadata/_edit_group_ = true
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Lights/AnimatableBodyWithLight"]
+
 [node name="Lines" type="Node2D" parent="."]
 
 [node name="Line2D" type="Line2D" parent="Lines"]
@@ -376,3 +378,6 @@ width_curve = SubResource("Curve_272bh")
 joint_mode = 1
 begin_cap_mode = 1
 script = ExtResource("8_line_collision")
+
+[connection signal="screen_entered" from="Lights/AnimatableBodyWithLight/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="Lights/AnimatableBodyWithLight/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

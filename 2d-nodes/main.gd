@@ -31,7 +31,7 @@ func _ready():
 	# 애니메이션 시작
 	# 원본 위치 저장
 	start_position_animation(animatable_body)
-	start_position_animation(animatable_body_with, Vector2(100, 0))
+	start_position_animation(animatable_body_with, Vector2(-250, 0))
 	
 	# 조인트별 특별한 설정 적용
 	setup_joint_behaviors()
@@ -210,3 +210,12 @@ func _on_area_2d_body_entered(body):
 func _on_area_2d_body_exited(body):
 	if body.name == "CharacterBody2D":
 		pass  # 실시간 업데이트로 처리됨
+
+func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
+	print('Screen Entered')
+	pass # Replace with function body.
+
+
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	print('Screen Exited')
+	pass # Replace with function body.
