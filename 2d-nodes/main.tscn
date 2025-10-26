@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bn1xuhyfpftiy"]
+[gd_scene load_steps=21 format=3 uid="uid://bn1xuhyfpftiy"]
 
 [ext_resource type="Script" uid="uid://de2f0b1t0tta4" path="res://main.gd" id="1_tefeu"]
 [ext_resource type="Texture2D" uid="uid://cu1cbkgncd34e" path="res://assets/장판.png" id="2_o6xl0"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://bhbwcjkqn0gtq" path="res://assets/전구.png" id="6_ya4ey"]
 [ext_resource type="Script" uid="uid://c87whe0whkbvl" path="res://area_with_visual.gd" id="7_area_script"]
 [ext_resource type="Script" uid="uid://ctaq0cn8trabb" path="res://line_with_collision.gd" id="8_line_collision"]
+[ext_resource type="Shader" uid="uid://d0le0i0tf0xpq" path="res://minimap.gdshader" id="9_minimap_shader"]
+[ext_resource type="Script" uid="uid://7by3k25445qj" path="res://minimap.gd" id="10_minimap_script"]
 
 [sub_resource type="GDScript" id="GDScript_y5ufn"]
 
@@ -35,6 +37,9 @@ polygon = PackedVector2Array(176.99998, 163.99998, 327, 160.99998, 326, 316, 177
 [sub_resource type="Curve" id="Curve_272bh"]
 _data = [Vector2(0.28915662, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.04094255), 0.0, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_minimap"]
+shader = ExtResource("9_minimap_shader")
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_tefeu")
@@ -378,6 +383,71 @@ width_curve = SubResource("Curve_272bh")
 joint_mode = 1
 begin_cap_mode = 1
 script = ExtResource("8_line_collision")
+
+[node name="MinimapUI" type="CanvasLayer" parent="."]
+
+[node name="MinimapContainer" type="Control" parent="MinimapUI"]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -220.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 220.0
+grow_horizontal = 0
+
+[node name="Panel" type="Panel" parent="MinimapUI/MinimapContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="MinimapUI/MinimapContainer/Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 25.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 16
+text = "🗺️ 미니맵"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="MinimapUI/MinimapContainer/Panel"]
+copy_mode = 2
+
+[node name="MinimapDisplay" type="ColorRect" parent="MinimapUI/MinimapContainer/Panel/BackBufferCopy"]
+material = SubResource("ShaderMaterial_minimap")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -65.0
+offset_right = 80.0
+offset_bottom = 95.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("10_minimap_script")
+
+[node name="PlayerMarker" type="ColorRect" parent="MinimapUI/MinimapContainer/Panel/BackBufferCopy/MinimapDisplay"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -3.0
+offset_top = -3.0
+offset_right = 3.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0, 1)
 
 [connection signal="screen_entered" from="Lights/AnimatableBodyWithLight/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
 [connection signal="screen_exited" from="Lights/AnimatableBodyWithLight/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
