@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bn1xuhyfpftiy"]
+[gd_scene load_steps=17 format=3 uid="uid://bn1xuhyfpftiy"]
 
 [ext_resource type="Script" uid="uid://de2f0b1t0tta4" path="res://main.gd" id="1_tefeu"]
 [ext_resource type="Texture2D" uid="uid://cu1cbkgncd34e" path="res://assets/장판.png" id="2_o6xl0"]
@@ -30,6 +30,10 @@ size = Vector2(459.5, 242)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_272bh"]
 polygon = PackedVector2Array(176.99998, 163.99998, 327, 160.99998, 326, 316, 177.99998, 312)
+
+[sub_resource type="Curve" id="Curve_272bh"]
+_data = [Vector2(0.28915662, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.04094255), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_tefeu")
@@ -360,3 +364,13 @@ scale = Vector2(0.043368258, 0.27616346)
 color = Color(0.26475334, 0.26475334, 0.26475334, 1)
 shadow_enabled = true
 metadata/_edit_group_ = true
+
+[node name="Lines" type="Node2D" parent="."]
+
+[node name="Line2D" type="Line2D" parent="Lines"]
+position = Vector2(495, 33)
+scale = Vector2(1, 0.9291045)
+points = PackedVector2Array(-14, 8, 96, 80, -25, 202, 135, 256)
+width_curve = SubResource("Curve_272bh")
+joint_mode = 1
+begin_cap_mode = 1
